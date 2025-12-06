@@ -58,7 +58,7 @@ Run the application (recommended):
 ```powershell
 uv run python main.py
 ```
-# or when venv is active:
+or when venv is active:
 ```
 python main.py
 ```
