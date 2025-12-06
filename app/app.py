@@ -93,3 +93,8 @@ def update_creature_endpoint(
 def delete_creature_endpoint(creature_id: int) -> dict:
     delete_creature(creature_id)
     return {"detail": "creature deleted successfully"}
+
+
+@app.get("/")
+def root():
+    return {"status": "ok", "service": "creatures-backend"}
