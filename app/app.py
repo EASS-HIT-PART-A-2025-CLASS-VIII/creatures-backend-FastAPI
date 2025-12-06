@@ -9,7 +9,6 @@ items_db = {}
 counter_id = 1
 
 
-# Pydantic models
 class CreatureCreate(BaseModel):
     name: str
     mythology: str
@@ -25,12 +24,14 @@ class CreatureRead(BaseModel):
     danger_level: int
 
 
-# API Endpoints
-@app.post("/creatures/")
+# --- Service / business-logic functions ---
+
+
 def create_creature(creature: CreatureCreate) -> CreatureRead:
     global counter_id
     creature_id = counter_id
     counter_id += 1
+
     creature_dict = {
         "id": creature_id,
         "name": creature.name,
@@ -39,19 +40,13 @@ def create_creature(creature: CreatureCreate) -> CreatureRead:
         "danger_level": creature.danger_level,
     }
     items_db[creature_id] = creature_dict
-
     return CreatureRead(**creature_dict)
 
 
-@app.get("/creatures/")
-def get_creatures() -> list[CreatureRead]:
-    creatures = []
-    for creature_dict in items_db.values():
-        creatures.append(CreatureRead(**creature_dict))
-    return creatures
+def list_creatures() -> list[CreatureRead]:
+    return [CreatureRead(**creature_dict) for creature_dict in items_db.values()]
 
 
-@app.put("/creatures/{creature_id}")
 def update_creature(creature_id: int, creature: CreatureCreate) -> CreatureRead:
     if creature_id not in items_db:
         raise HTTPException(status_code=404, detail="Creature not found")
@@ -64,15 +59,37 @@ def update_creature(creature_id: int, creature: CreatureCreate) -> CreatureRead:
         "danger_level": creature.danger_level,
     }
     items_db[creature_id] = creature_dict
-
     return CreatureRead(**creature_dict)
 
 
-@app.delete("/creatures/{creature_id}")
-def delete_creature(creature_id: int) -> dict:
+def delete_creature(creature_id: int) -> None:
     if creature_id not in items_db:
         raise HTTPException(status_code=404, detail="creature not found")
 
     del items_db[creature_id]
 
+
+# --- API Endpoints ---
+
+
+@app.post("/creatures/", response_model=CreatureRead)
+def create_creature_endpoint(creature: CreatureCreate) -> CreatureRead:
+    return create_creature(creature)
+
+
+@app.get("/creatures/", response_model=list[CreatureRead])
+def get_creatures_endpoint() -> list[CreatureRead]:
+    return list_creatures()
+
+
+@app.put("/creatures/{creature_id}", response_model=CreatureRead)
+def update_creature_endpoint(
+    creature_id: int, creature: CreatureCreate
+) -> CreatureRead:
+    return update_creature(creature_id, creature)
+
+
+@app.delete("/creatures/{creature_id}")
+def delete_creature_endpoint(creature_id: int) -> dict:
+    delete_creature(creature_id)
     return {"detail": "creature deleted successfully"}
