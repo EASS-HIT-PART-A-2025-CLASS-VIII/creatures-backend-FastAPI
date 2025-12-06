@@ -130,6 +130,15 @@ HTTP playground
 --------------
 Open `creatures.http` in VS Code (REST Client extension) and use the example requests. Ensure the API is running before sending requests.
 
+Deployment (Render)
+-------------------
+The service is deployed on Render.
+
+- Base URL (Render): https://creatures-backend-fastapi-1.onrender.com
+- Swagger UI: https://creatures-backend-fastapi-1.onrender.com/docs
+- ReDoc: https://creatures-backend-fastapi-1.onrender.com/redoc
+
+
 Notes & next steps
 ------------------
 - Storage is in-memory for EX1. Future exercises may replace it with SQLModel + SQLite.
