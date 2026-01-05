@@ -3,7 +3,8 @@ from fastapi.testclient import TestClient
 from sqlmodel import Session, SQLModel, create_engine
 from sqlmodel.pool import StaticPool
 
-from app.app import app, get_session
+from app.app import app
+from app.db import get_session
 
 # 1. Setup In-Memory Database for Testing
 # poolclass=StaticPool is CRITICAL. It ensures the in-memory DB persists
@@ -52,8 +53,8 @@ def test_create_creature(client: TestClient):
     data = response.json()
     assert data["name"] == payload["name"]
     assert "id" in data
-    # Verify the AI avatar logic ran (Robohash default)
-    assert "robohash.org" in data["image_url"]
+    # Verify the AI avatar logic ran (DiceBear default)
+    assert "api.dicebear.com" in data["image_url"]
 
 
 def test_get_creatures(client: TestClient):
