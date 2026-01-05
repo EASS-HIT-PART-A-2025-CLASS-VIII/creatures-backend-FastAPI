@@ -1,0 +1,139 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.0.1, pluggy-1.6.0 -- C:\Users\liad7\Projects\EX1_FastAPI_Foundations\.venv\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\liad7\Projects\EX1_FastAPI_Foundations
+plugins: anyio-4.11.0
+collecting ... collected 4 items
+
+frontend/tests/test_dashboard.py::test_dashboard_loads_no_exceptions FAILED [ 25%]
+frontend/tests/test_dashboard.py::test_dashboard_header_present FAILED   [ 50%]
+frontend/tests/test_dashboard.py::test_sidebar_navigation_buttons_exist FAILED [ 75%]
+frontend/tests/test_dashboard.py::test_summon_dialog_trigger FAILED      [100%]
+
+================================== FAILURES ===================================
+_____________________ test_dashboard_loads_no_exceptions ______________________
+
+    def test_dashboard_loads_no_exceptions():
+        """Verify the dashboard script runs without throwing errors."""
+        at = AppTest.from_file("frontend/dashboard.py").run()
+>       assert not at.exception
+E       assert not ElementList(_list=[Exception(message="No module named 'realm_map'", stack_trace=['File "C:\\Users\\liad7\\Projects\\EX1_FastAPI_Foundations\\frontend\\dashboard.py", line 4, in <module>\n    import realm_map'])])
+E        +  where ElementList(_list=[Exception(message="No module named 'realm_map'", stack_trace=['File "C:\\Users\\liad7\\Projects\\EX1_FastAPI_Foundations\\frontend\\dashboard.py", line 4, in <module>\n    import realm_map'])]) = AppTest(\n    _script_path='frontend\\dashboard.py',\n    default_timeout=3,\n    session_state={$$STREAMLIT_INTERNAL_KEY_TESTING: {}, $$STREAMLIT_INTERNAL_KEY_SCRIPT_RUN_WITHOUT_ERRORS: False},\n    _tree={\n        0: SpecialBlock(\n            type='main',\n            children={\n                0: Exception(message="No module named 'realm_map'", stack_trace=['File "C:\\Users\\liad7\\Projects\\EX1_FastAPI_Foundations\\frontend\\dashboard.py", line 4, in <module>\n    import realm_map'])\n            }\n        ),\n        1: SpecialBlock(\n            type='sidebar'\n        ),\n        2: SpecialBlock(\n            type='event'\n        )\n    }\n).exception
+
+frontend\tests\test_dashboard.py:10: AssertionError
+---------------------------- Captured stderr call -----------------------------
+2026-01-05 18:57:50.958 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-01-05 18:57:51.117 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Users\liad7\Projects\EX1_FastAPI_Foundations\.venv\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Users\liad7\Projects\EX1_FastAPI_Foundations\.venv\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 671, in code_to_exec
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\liad7\Projects\EX1_FastAPI_Foundations\frontend\dashboard.py", line 4, in <module>
+    import realm_map
+ModuleNotFoundError: No module named 'realm_map'
+________________________ test_dashboard_header_present ________________________
+
+    def test_dashboard_header_present():
+        """Verify the main header is rendered."""
+        at = AppTest.from_file("frontend/dashboard.py").run()
+        # Depending on how markdown is rendered, we check if the text exists in the markdown elements
+        # dashboard.py: st.markdown('<h1 ...>Bestiary Registry</h1>', ...)
+    
+        # We inspect all markdown elements
+        found = False
+        for md in at.markdown:
+            if "Bestiary Registry" in md.value:
+                found = True
+                break
+>       assert found, "Main header 'Bestiary Registry' not found in markdown elements"
+E       AssertionError: Main header 'Bestiary Registry' not found in markdown elements
+E       assert False
+
+frontend\tests\test_dashboard.py:24: AssertionError
+---------------------------- Captured stderr call -----------------------------
+2026-01-05 18:57:51.448 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-01-05 18:57:51.479 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Users\liad7\Projects\EX1_FastAPI_Foundations\.venv\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Users\liad7\Projects\EX1_FastAPI_Foundations\.venv\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 671, in code_to_exec
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\liad7\Projects\EX1_FastAPI_Foundations\frontend\dashboard.py", line 4, in <module>
+    import realm_map
+ModuleNotFoundError: No module named 'realm_map'
+____________________ test_sidebar_navigation_buttons_exist ____________________
+
+    def test_sidebar_navigation_buttons_exist():
+        """Verify sidebar navigation buttons are present."""
+        at = AppTest.from_file("frontend/dashboard.py").run()
+    
+        # Using label matching. Note: Labels in dashboard/sidebar might have been modified (emojis removed)
+        # sidebar.py has "Bestiary Registry", "Realm Map", "Settings", "Log Out"
+    
+>       assert at.sidebar.button[0].label == "Bestiary Registry"
+               ^^^^^^^^^^^^^^^^^^^^
+
+frontend\tests\test_dashboard.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WidgetList(), idx = 0
+
+    def __getitem__(self, idx: int | slice) -> El_co | ElementList[El_co]:
+        if isinstance(idx, slice):
+            return ElementList(self._list[idx])
+>       return self._list[idx]
+               ^^^^^^^^^^^^^^^
+E       IndexError: list index out of range
+
+.venv\Lib\site-packages\streamlit\testing\v1\element_tree.py:228: IndexError
+---------------------------- Captured stderr call -----------------------------
+2026-01-05 18:57:51.497 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-01-05 18:57:51.540 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Users\liad7\Projects\EX1_FastAPI_Foundations\.venv\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Users\liad7\Projects\EX1_FastAPI_Foundations\.venv\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 671, in code_to_exec
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\liad7\Projects\EX1_FastAPI_Foundations\frontend\dashboard.py", line 4, in <module>
+    import realm_map
+ModuleNotFoundError: No module named 'realm_map'
+_________________________ test_summon_dialog_trigger __________________________
+
+    def test_summon_dialog_trigger():
+        """Verify clicking 'Summon New Creature' opens the dialog logic."""
+        at = AppTest.from_file("frontend/dashboard.py").run()
+    
+        # The button is "\uff0b Summon New Creature" in dashboard.py
+        summon_btns = [b for b in at.button if "Summon New Creature" in b.label]
+>       assert len(summon_btns) > 0, "Summon button not found"
+E       AssertionError: Summon button not found
+E       assert 0 > 0
+E        +  where 0 = len([])
+
+frontend\tests\test_dashboard.py:49: AssertionError
+---------------------------- Captured stderr call -----------------------------
+2026-01-05 18:57:51.593 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-01-05 18:57:51.629 Uncaught app execution
+Traceback (most recent call last):
+  File "C:\Users\liad7\Projects\EX1_FastAPI_Foundations\.venv\Lib\site-packages\streamlit\runtime\scriptrunner\exec_code.py", line 129, in exec_func_with_error_handling
+    result = func()
+  File "C:\Users\liad7\Projects\EX1_FastAPI_Foundations\.venv\Lib\site-packages\streamlit\runtime\scriptrunner\script_runner.py", line 671, in code_to_exec
+    exec(code, module.__dict__)  # noqa: S102
+    ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\liad7\Projects\EX1_FastAPI_Foundations\frontend\dashboard.py", line 4, in <module>
+    import realm_map
+ModuleNotFoundError: No module named 'realm_map'
+=========================== short test summary info ===========================
+FAILED frontend/tests/test_dashboard.py::test_dashboard_loads_no_exceptions - assert not ElementList(_list=[Exception(message="No module named 'realm_map'", stack_trace=['File "C:\\Users\\liad7\\Projects\\EX1_FastAPI_Foundations\\frontend\\dashboard.py", line 4, in <module>\n    import realm_map'])])
+ +  where ElementList(_list=[Exception(message="No module named 'realm_map'", stack_trace=['File "C:\\Users\\liad7\\Projects\\EX1_FastAPI_Foundations\\frontend\\dashboard.py", line 4, in <module>\n    import realm_map'])]) = AppTest(\n    _script_path='frontend\\dashboard.py',\n    default_timeout=3,\n    session_state={$$STREAMLIT_INTERNAL_KEY_TESTING: {}, $$STREAMLIT_INTERNAL_KEY_SCRIPT_RUN_WITHOUT_ERRORS: False},\n    _tree={\n        0: SpecialBlock(\n            type='main',\n            children={\n                0: Exception(message="No module named 'realm_map'", stack_trace=['File "C:\\Users\\liad7\\Projects\\EX1_FastAPI_Foundations\\frontend\\dashboard.py", line 4, in <module>\n    import realm_map'])\n            }\n        ),\n        1: SpecialBlock(\n            type='sidebar'\n        ),\n        2: SpecialBlock(\n            type='event'\n        )\n    }\n).exception
+FAILED frontend/tests/test_dashboard.py::test_dashboard_header_present - AssertionError: Main header 'Bestiary Registry' not found in markdown elements
+assert False
+FAILED frontend/tests/test_dashboard.py::test_sidebar_navigation_buttons_exist - IndexError: list index out of range
+FAILED frontend/tests/test_dashboard.py::test_summon_dialog_trigger - AssertionError: Summon button not found
+assert 0 > 0
+ +  where 0 = len([])
+============================== 4 failed in 1.41s ==============================
