@@ -15,28 +15,28 @@ It features persistent data management, dynamic real-time filtering, automated A
 
 ### 1. The Dashboard
 The central command center for monitoring all registered entities. Features real-time metrics, a responsive data grid, and quick actions.
-> ![alt text](<צילום מסך 2026-01-05 183805.png>)
+> ![alt text](<frontend/pictures/dashboard_pic.png>)
 
 ### 2. Summoning New Entities
 A streamlined workflow for adding new creatures to the registry.
 *   **Step 1: Initiation** - Launching the summon dialog.
-    > ![alt text](<Adobe Express 2026-01-05 19.26.23.png>)
+    > ![alt text](<frontend/pictures/create_creature_full_screen_pic.png>)
 *   **Step 2: Details** - Filling in creature attributes (Class, Mythology, Danger Level).
-    > ![alt text](<צילום מסך 2026-01-05 183921.png>)
+    > ![alt text](<frontend/pictures/create_creature_pic.png>).
 *   **Step 3: Confirmation** - Successful registration and feedback.
-    > ![alt text](<צילום מסך 2026-01-05 183940.png>)
+    > ![alt text](<frontend/pictures/create_creature2_pic.png>)
 
 ### 3. Entity Management (Editing)
 Modify existing records with ease, updating attributes like Danger Level, Habitat, or Class as the lore evolves.
-> ![alt text](<צילום מסך 2026-01-05 183955.png>)
+> 
 
 ### 4. Advanced Filtering
 Drill down into the data using powerful multi-select filters for Class, Mythology, and Danger Level ranges.
-> ![alt text](<צילום מסך 2026-01-05 184042.png>)
+> ![alt text](<frontend/pictures/filter_pic.png>)
 
 ### 5. System Settings
 Manage global configurations, including the creation and customization of Creature Classes/Categories.
-> ![alt text](<צילום מסך 2026-01-05 184056.png>)
+> ![alt text](<frontend/pictures/settings_pic.png>)
 
 ---
 
