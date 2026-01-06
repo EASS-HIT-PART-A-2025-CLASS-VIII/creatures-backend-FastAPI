@@ -2,7 +2,7 @@ import streamlit as st
 
 
 def render_sidebar(current_view: str):
-    # Custom Header
+
     st.sidebar.markdown(
         """
         <div style="margin-bottom: 2rem;">
@@ -18,9 +18,7 @@ def render_sidebar(current_view: str):
         unsafe_allow_html=True,
     )
 
-    # Navigation Buttons (Smooth Transition via Session State)
-    # Using emojis as icons since st.button doesn't support HTML internals easily
-    # We will use CSS to style these buttons to look like the design sidebar items
+    # Navigation Buttons
 
     # Callback to update view
     def set_view(v):
@@ -51,7 +49,7 @@ def render_sidebar(current_view: str):
         '<div style="flex-grow: 1; height: 100px;"></div>', unsafe_allow_html=True
     )  # Spacer
 
-    # Footer / Settings
+
     st.sidebar.markdown(
         """
     <div style="border-top: 1px solid #4d3267; margin-top: auto; padding-top: 1rem;"></div>

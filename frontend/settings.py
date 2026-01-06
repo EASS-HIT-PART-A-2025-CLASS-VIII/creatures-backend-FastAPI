@@ -10,8 +10,7 @@ API_URL = os.getenv("API_URL", "http://localhost:8000")
 def edit_class_dialog(c):
     st.markdown(f"**Edit {c['name']}**")
 
-    # Pre-fill simple color if possible (this is tricky from rgba, so we default to black if parsing fails, user picks new)
-    # Attempt to parse hex from text_color which is what we used for storing exact color
+    # Pre-fill color
     default_color = c.get("text_color", "#9333ea")
 
     e_name = st.text_input("Name", value=c["name"])

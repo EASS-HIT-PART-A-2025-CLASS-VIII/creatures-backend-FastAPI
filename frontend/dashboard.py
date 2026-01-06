@@ -9,7 +9,7 @@ import streamlit.components.v1 as components
 import os
 import api_utils
 
-# --- Configuration ---
+
 st.set_page_config(
     page_title="Mythical Creature Dashboard",
     page_icon="🐉",
@@ -20,7 +20,7 @@ st.set_page_config(
 API_URL = os.getenv("API_URL", "http://localhost:8000")
 
 
-# --- CSS Styling ---
+
 def load_css():
     # Inject Fonts (Material Symbols etc.)
     st.markdown(
@@ -40,7 +40,7 @@ def load_css():
 load_css()
 
 
-# --- Logic ---
+
 
 
 def format_time_ago(iso_str):
@@ -97,7 +97,7 @@ def update_creature(id, payload):
         st.error(f"Error: {e}")
 
 
-# ... (omitting dialog definitions content for brevity in replace block if not changing lines inside them directly, but I need to target lines precisely)
+
 
 
 @st.dialog("Summon New Creature")
@@ -381,9 +381,8 @@ st.write("")
 # Using columns with manual markdown icons not perfect, sticking to input with placeholders as cleaner in Python
 s_col, f_col = st.columns([2, 1])
 with s_col:
-    # Fake search icon via placeholder
-    # We inject a manual icon overlay and use a JS hack to inject styles into the iframe
-    # This attempts to fix BOTH the text overlap (padding) and the white background (theming)
+    # Custom search icon styling
+    # We inject a manual icon overlay and use dynamic styles into the iframe
     st.markdown(
         """
 <div style="
@@ -435,7 +434,7 @@ with s_col:
             font-family: 'Inter', sans-serif !important;
           }
 
-          /* FORCE PURPLE FOCUS - Using Box-Shadow Hack to cover any Red Border */
+          /* FORCE PURPLE FOCUS */
           input:focus, textarea:focus, 
           input:active, textarea:active,
           input:focus-visible, textarea:focus-visible {
