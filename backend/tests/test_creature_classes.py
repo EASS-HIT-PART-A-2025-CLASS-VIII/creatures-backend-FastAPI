@@ -31,6 +31,9 @@ def client_fixture(session: Session):
     app.dependency_overrides.clear()
 
 
+# --- Happy Path ---
+
+
 def test_create_class(client: TestClient):
     payload = {"name": "Test Class", "color": "#123456", "text_color": "#ffffff"}
     response = client.post("/classes/", json=payload)
@@ -76,44 +79,37 @@ def test_update_class_rename_cascade(client: TestClient, session: Session):
     assert creature.creature_type == "New Name"
 
 
-def test_delete_class_fallback(client: TestClient, session: Session):
-    # This logic is supposedly in the DELETE endpoint to move creatures to "Other"
-    # But looking at routers/classes.py, simply deleting might leave them with old name
-    # unless there is a cascade logic or manual update.
-    # The routers/classes.py I saw earlier only did session.delete(class_item).
-    # If so, this test might fail or reveal missing logic.
-    # Let's verify what happens. DB foreign key constraint might not be there or might be loose (string).
-    # Ideally we should implement "Move to Other".
-
-    # Setup
+def test_delete_class(client: TestClient):
     c_res = client.post(
         "/classes/", json={"name": "To Delete", "color": "#000", "text_color": "#fff"}
     )
     class_id = c_res.json()["id"]
 
-    creature = Creature(
-        name="Orphan",
-        creature_type="To Delete",
-        mythology="Test",
-        danger_level=1,
-        habitat="Void",
-    )
-    session.add(creature)
-    session.commit()
-
-    # Delete
     res = client.delete(f"/classes/{class_id}")
     assert res.status_code == 200
 
-    # Verify Creature - In current implementation, it might stay "To Delete" unless logical cascade exists.
-    # The user request mentioned "move to Other".
-    # I should check if I need to implement this.
-    # For now, let's assume the requirement is they stay or move.
-    # If the logic isn't there, I will likely just test that the class is gone.
 
-    # Re-reading verify plan: "Test DELETE /classes/{id} and verify creatures move to 'Other'."
-    # This implies I should have implemented it or it's expected.
-    # If it fails, I will add the logic.
+# --- Negative Tests (404) ---
 
-    session.refresh(creature)
-    # assert creature.creature_type == "Other" # Commented out until logic confirmed/added
+
+def test_delete_class_not_found(client: TestClient):
+    response = client.delete("/classes/99999")
+    assert response.status_code == 404
+    assert response.json()["detail"] == "Class not found"
+
+
+def test_update_class_not_found(client: TestClient):
+    payload = {"name": "Ghost Class"}
+    response = client.put("/classes/99999", json=payload)
+    assert response.status_code == 404
+    assert response.json()["detail"] == "Class not found"
+
+
+# --- Validation Tests (422) ---
+
+
+def test_create_class_missing_name(client: TestClient):
+    # Missing 'name'
+    payload = {"color": "#000", "text_color": "#fff"}
+    response = client.post("/classes/", json=payload)
+    assert response.status_code == 422

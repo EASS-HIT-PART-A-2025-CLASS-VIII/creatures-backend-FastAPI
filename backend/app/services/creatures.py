@@ -48,6 +48,13 @@ def list_creatures(session: Session) -> list[Creature]:
     return creatures
 
 
+def get_creature(session: Session, creature_id: int) -> Creature:
+    creature = session.get(Creature, creature_id)
+    if not creature:
+        raise HTTPException(status_code=404, detail="Creature not found")
+    return creature
+
+
 def update_creature(
     session: Session, creature_id: int, creature: CreatureCreate
 ) -> Creature:

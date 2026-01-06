@@ -7,6 +7,7 @@ from app.models import (
     Creature,
 )
 
+
 def create_class(session: Session, class_data: CreatureClassCreate) -> CreatureClass:
     # Check uniqueness
     existing = session.exec(
@@ -21,8 +22,10 @@ def create_class(session: Session, class_data: CreatureClassCreate) -> CreatureC
     session.refresh(db_class)
     return db_class
 
+
 def list_classes(session: Session) -> list[CreatureClass]:
     return session.exec(select(CreatureClass)).all()
+
 
 def delete_class(session: Session, class_id: int):
     class_item = session.get(CreatureClass, class_id)
@@ -31,7 +34,10 @@ def delete_class(session: Session, class_id: int):
     session.delete(class_item)
     session.commit()
 
-def update_class(session: Session, class_id: int, class_update: CreatureClassUpdate) -> CreatureClass:
+
+def update_class(
+    session: Session, class_id: int, class_update: CreatureClassUpdate
+) -> CreatureClass:
     db_class = session.get(CreatureClass, class_id)
     if not db_class:
         raise HTTPException(status_code=404, detail="Class not found")

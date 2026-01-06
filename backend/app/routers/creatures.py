@@ -18,6 +18,11 @@ def get_creatures_endpoint(session: SessionDep) -> list[CreatureRead]:
     return service.list_creatures(session)
 
 
+@router.get("/{creature_id}", response_model=CreatureRead)
+def get_creature_endpoint(creature_id: int, session: SessionDep) -> CreatureRead:
+    return service.get_creature(session, creature_id)
+
+
 @router.put("/{creature_id}", response_model=CreatureRead)
 def update_creature_endpoint(
     creature_id: int, creature: CreatureCreate, session: SessionDep
