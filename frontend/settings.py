@@ -1,8 +1,9 @@
 import requests
 import api_utils
 import streamlit as st
+import os
 
-API_URL = "http://localhost:8000"
+API_URL = os.getenv("API_URL", "http://localhost:8000")
 
 
 @st.dialog("Edit Class")
