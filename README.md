@@ -1,4 +1,4 @@
-# Bestiary Registry - 🐉 Mythical Creature Management System
+# 🐉 Bestiary Registry - Mythical Creature Management System
 
 ![Status](https://img.shields.io/badge/Status-Active-success)
 ![Python](https://img.shields.io/badge/Python-3.11%2B-blue)
@@ -20,7 +20,7 @@ This project implements **EX1 (FastAPI Backend)** and **EX2 (Streamlit Frontend)
 ## Frontend - What the User Can Do
 *   Implemented using **Streamlit**.
 *   View existing registry data fetched from the backend.
-*   **CRUD actions**: Fully implemented (Create, Read, Update, Delete).
+*   Supports full CRUD workflows for creatures and classes via the frontend.
 
 It features persistent data management, dynamic real-time filtering, automated avatar generation, and a responsive dark-mode UI.
 
@@ -42,13 +42,9 @@ A streamlined workflow for adding new creatures to the registry.
 <p align="center">
   <img src="frontend/pictures/create_creature_full_screen_pic.png" alt="Initiation" width="700">
 </p>
+
 *   **Step 2: Details** - Filling in creature attributes (Class, Mythology, Danger Level).
 
-<p align="center">
-  <img src="frontend/pictures/create_creature_pic.png" alt="Details" width="300" style="border: 1px solid #000;">
-</p>
-*   **Step 3: Confirmation** - Successful registration and feedback.
-    
 <p align="center">
   <img src="frontend/pictures/create_creature2_pic.png" alt="Confirmation" width="300" style="border: 1px solid #000;">
 </p>
@@ -78,14 +74,14 @@ Manage global configurations, including the creation and customization of Creatu
 
 ## Key Features
 
-*   **High-Performance Backend**: Built with **FastAPI**, offering auto-generated Swagger documentation and rapid execution.
-*   **Persistent Storage**: Utilizes **SQLite** with **SQLModel** (ORM) for reliable, local data persistence using standard SQL relationships.
-*   **Dynamic Frontend**: A "Dark Neon" styled **Streamlit** interface with custom CSS injection for a premium user experience.
+*   **FastAPI Backend**: Backend implemented using **FastAPI** with auto-generated Swagger/OpenAPI documentation.
+*   **Persistent Storage**: Uses **SQLite** with **SQLModel** (ORM) for local data persistence.
+*   **Streamlit Frontend**: Streamlit-based frontend with custom CSS styling and interactive UI components.
 *   **Real-Time Exploration**:
     *   **Instant Search**: Filter by name as you type.
     *   **Multi-Faceted Filtering**: Filter by multiple categories simultaneously.
 *   **Realm Map**: Visual territory mapping.
-*   **Avatars**: Uses DiceBear identicon API. Images are external URLs. No AI/ML is involved.
+*   **Avatars**: Uses DiceBear identicon API. Images are external URLs.
 *   **Testing**: API tests implemented using pytest and FastAPI TestClient.
 
 ---
@@ -146,11 +142,22 @@ uv run python main.py # Start server at http://localhost:8000
 Launch the dashboard interface. (Open a new terminal window).
 
 ```powershell
-# Ensure you are in the project root or frontend directory
+# Ensure you are in the project root
 cd backend 
 uv run python -m streamlit run ../frontend/dashboard.py
 ```
 *The dashboard will auto-launch at `http://localhost:8501`*
+
+---
+
+## Docker (Alternative Run Method)
+The backend is dockerized. A `Dockerfile` exists and builds successfully.
+
+If you prefer running via Docker (backend only):
+```powershell
+docker build -t bestiary-backend ./backend
+docker run -d -p 8000:8000 bestiary-backend
+```
 
 ---
 
@@ -161,7 +168,7 @@ Once the backend is running, full interactive documentation is available:
 *   **ReDoc**: [http://localhost:8000/redoc](http://localhost:8000/redoc)
 
 ## Testing
-API tests are implemented using `pytest` and `FastAPI TestClient`.
+Includes automated API tests using `pytest` and `FastAPI TestClient`, verified to run successfully from the backend environment.
 
 Run the full verified test suite:
 ```powershell
