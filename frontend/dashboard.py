@@ -18,12 +18,6 @@ st.set_page_config(
 )
 
 API_URL = os.getenv("API_URL", "http://localhost:8000")
-st.write("DEBUG API_URL:", API_URL)
-try:
-    r = requests.get(f"{API_URL}/health", timeout=10)
-    st.write("DEBUG BACKEND /health:", r.status_code, r.text)
-except Exception as e:
-    st.error(f"DEBUG BACKEND ERROR: {e}")
 
 
 # --- CSS Styling ---
