@@ -155,7 +155,8 @@ The backend is dockerized. A `Dockerfile` exists and builds successfully.
 
 If you prefer running via Docker (backend only):
 ```powershell
-docker build -t bestiary-backend ./backend
+# Run from 'backend' directory
+docker build -t bestiary-backend .
 docker run -d -p 8000:8000 bestiary-backend
 ```
 
