@@ -547,7 +547,7 @@ for c in filtered:
             f"""
         <div style="display: flex; align-items: center; gap: 12px;">
             <img src="{img_url}" class="avatar-img">
-            <span class="text-white font-bold table-text">{c['name']}</span>
+            <span class="text-white font-bold table-text">{c["name"]}</span>
         </div>
         """,
             unsafe_allow_html=True,

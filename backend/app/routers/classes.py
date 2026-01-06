@@ -50,7 +50,7 @@ def update_class(class_id: int, class_update: CreatureClassUpdate, session: Sess
         raise HTTPException(status_code=404, detail="Class not found")
 
     old_name = db_class.name
-    update_data = class_update.dict(exclude_unset=True)
+    update_data = class_update.model_dump(exclude_unset=True)
 
     # Check if name is changing
     new_name = update_data.get("name")

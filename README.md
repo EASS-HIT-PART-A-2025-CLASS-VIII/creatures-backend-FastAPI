@@ -14,17 +14,30 @@ It features persistent data management, dynamic real-time filtering, automated A
 ## 📸 Application Showcase
 
 ### 1. The Dashboard
-The central command center for monitoring all registered entities. Features real-time metrics, a responsive data grid, and quick actions.
-> ![alt text](<frontend/pictures/dashboard_pic.png>)
+The central command center for monitoring all registered entities. Features real-time metrics, a responsive data grid, and quick actions. 
+
+<p align="center">
+<img src="frontend/pictures/dashboard_pic.png" alt="dashboard preview" width="700" >
+</p>
+
 
 ### 2. Summoning New Entities
 A streamlined workflow for adding new creatures to the registry.
 *   **Step 1: Initiation** - Launching the summon dialog.
-    > ![alt text](<frontend/pictures/create_creature_full_screen_pic.png>)
+    
+<p align="center">
+  <img src="frontend/pictures/create_creature_full_screen_pic.png" alt="Initiation" width="700">
+</p>
 *   **Step 2: Details** - Filling in creature attributes (Class, Mythology, Danger Level).
-    > ![alt text](<frontend/pictures/create_creature_pic.png>).
+
+<p align="center">
+  <img src="frontend/pictures/create_creature_pic.png" alt="Details" width="300">
+</p>
 *   **Step 3: Confirmation** - Successful registration and feedback.
-    > ![alt text](<frontend/pictures/create_creature2_pic.png>)
+    
+<p align="center">
+  <img src="frontend/pictures/create_creature2_pic.png" alt="Confirmation" width="300">
+</p>
 
 ### 3. Entity Management (Editing)
 Modify existing records with ease, updating attributes like Danger Level, Habitat, or Class as the lore evolves.
@@ -32,11 +45,17 @@ Modify existing records with ease, updating attributes like Danger Level, Habita
 
 ### 4. Advanced Filtering
 Drill down into the data using powerful multi-select filters for Class, Mythology, and Danger Level ranges.
-> ![alt text](<frontend/pictures/filter_pic.png>)
+
+<p align="center">
+  <img src="frontend/pictures/filter_pic.png" alt="Filtering" width="300">
+</p>
 
 ### 5. System Settings
 Manage global configurations, including the creation and customization of Creature Classes/Categories.
-> ![alt text](<frontend/pictures/settings_pic.png>)
+
+<p align="center">
+  <img src="frontend/pictures/settings_pic.png" alt="Settings" width="700">
+</p>
 
 ---
 
@@ -111,8 +130,8 @@ Launch the dashboard interface. (Open a new terminal window).
 
 ```powershell
 # Ensure you are in the project root or frontend directory
-cd backend # dependencies are managed here in this setup
-uv run streamlit run ../frontend/dashboard.py
+cd backend 
+uv run python -m streamlit run ../frontend/dashboard.py
 ```
 *The dashboard will auto-launch at `http://localhost:8501`*
 
