@@ -49,6 +49,9 @@ A streamlined workflow for adding new creatures to the registry.
   <img src="frontend/pictures/create_creature2_pic.png" alt="Confirmation" width="300" style="border: 1px solid #000;">
 </p>
 
+*   **Step 3: Creation** - Pressing the 'Summon Entity' button creates a new creature and adds it into the registry.
+
+
 ### 3. Entity Management (Editing)
 Modify existing records with ease, updating attributes like Danger Level, Habitat, or Class as the lore evolves.
 
