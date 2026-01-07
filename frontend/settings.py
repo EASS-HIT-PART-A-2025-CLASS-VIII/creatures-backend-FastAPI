@@ -3,6 +3,12 @@ import streamlit as st
 import api_client
 
 
+# --- Flash Message Check ---
+if "toast_msg" in st.session_state:
+    msg, icon = st.session_state.pop("toast_msg")
+    st.toast(msg, icon=icon)
+
+
 @st.dialog("Edit Class")
 def edit_class_dialog(c):
     st.markdown(f"**Edit {c['name']}**")
@@ -27,7 +33,7 @@ def edit_class_dialog(c):
         try:
             api_client.update_class(c["id"], payload)
             api_utils.clear_cache()
-            st.success("Updated!")
+            st.session_state["toast_msg"] = ("Class Updated!", "✅")
             st.rerun()
         except Exception as e:
             st.error(f"Error: {e}")
@@ -49,6 +55,7 @@ def delete_class_dialog(c):
             try:
                 api_client.delete_class(c["id"])
                 api_utils.clear_cache()
+                st.session_state["toast_msg"] = ("Class Deleted!", "🗑️")
                 st.rerun()
             except Exception as e:
                 st.error(f"Error: {e}")
@@ -97,7 +104,7 @@ def render_settings():
                         try:
                             api_client.create_class(payload)
                             api_utils.clear_cache()
-                            st.success(f"Added {new_name}!")
+                            st.session_state["toast_msg"] = (f"Class '{new_name}' added!", "✨")
                             st.rerun()
                         except Exception as e:
                             st.error(f"Error: {e}")
